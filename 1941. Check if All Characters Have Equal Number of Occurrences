@@ -1,0 +1,32 @@
+1941. Check if All Characters Have Equal Number of Occurrences
+
+
+Problem Description : 
+
+Given a string s, return true if s is a good string, or false otherwise.
+
+A string s is good if all the characters that appear in s have the same number of occurrences (i.e., the same frequency).
+
+
+Solution : 
+
+
+bool areOccurrencesEqual(string s) 
+{
+    unordered_map<char,int> mp;
+
+    for(int i=0;i<s.length();i++)
+    {
+        mp[s[i]]++;
+    }
+
+    int a=mp[s[0]];
+    for(auto it: mp)
+    {
+        if(it.second != a)
+            return false;
+    }
+    return true;
+
+}
+
