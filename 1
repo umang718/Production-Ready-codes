@@ -1,0 +1,26 @@
+1832. Check if the Sentence Is Pangram
+
+Problem description : 
+
+A pangram is a sentence where every letter of the English alphabet appears at least once.
+
+Given a string sentence containing only lowercase English letters, return true if sentence is a pangram, or false otherwise.
+
+
+Solution: 
+
+bool checkIfPangram(string sentence) 
+{
+    int alphabets[26] = {0};
+    for(int i=0;i<sentence.length();i++)
+    {
+        alphabets[sentence[i] - 'a']++;
+    }
+    for(int i=0;i<26;i++)
+    {
+        if(alphabets[i] == 0)
+            return false;
+    }
+    return true;
+
+}
