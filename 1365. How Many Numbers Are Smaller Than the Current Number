@@ -1,0 +1,28 @@
+1365. How Many Numbers Are Smaller Than the Current Number
+
+Problem Description : 
+
+Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it. That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
+
+Return the answer in an array.
+
+
+Solution : 
+
+vector<int> smallerNumbersThanCurrent(vector<int>& nums) 
+{
+    vector<int> smallerNumbers;
+
+    for(int i=0;i<nums.size();i++)
+    {
+        int smallcount=0;
+        for(int j=0;j<nums.size();j++)
+        {
+            if(i!=j and nums[i] > nums[j])
+                smallcount++;
+        }
+        smallerNumbers.push_back(smallcount);
+    }
+    return smallerNumbers;
+
+}
