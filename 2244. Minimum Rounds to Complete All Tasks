@@ -1,0 +1,37 @@
+2244. Minimum Rounds to Complete All Tasks
+
+Problem Description : 
+
+You are given a 0-indexed integer array tasks, where tasks[i] represents the difficulty level of a task. In each round, you can complete either 2 or 3 tasks of the same difficulty level.
+
+Return the minimum rounds required to complete all the tasks, or -1 if it is not possible to complete all the tasks.
+
+Solution : 
+
+int minimumRounds(vector<int>& tasks) 
+    {
+        sort(tasks.begin(), tasks.end());
+        
+        unordered_map<int, int> mp;
+        
+        for(auto it: tasks)
+        {
+            mp[it]++;
+        }
+        int minRounds=0;
+        for(auto it: mp)
+        {
+            if(it.second == 1)
+                return -1;
+            
+            minRounds+=it.second/3;
+            
+            if(it.second %3 ==1 or it.second%3 == 2)
+                minRounds++;
+            
+        }
+        return minRounds;
+        
+    }
+    
+    TC: O(nlogn)
