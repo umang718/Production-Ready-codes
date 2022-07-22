@@ -1,0 +1,44 @@
+99. Recover Binary Search Tree
+
+Problem Description : 
+
+You are given the root of a binary search tree (BST), where the values of exactly two nodes of the tree were swapped by mistake. Recover the tree without changing its structure.
+
+
+
+
+
+Solution : 
+
+void markTree(TreeNode* root, TreeNode*& prev, TreeNode*& first, TreeNode*& end) 
+{
+    if (!root) return;
+    markTree(root->left, prev, first, end);
+    if (prev) 
+    {
+        if (root->val < prev->val) 
+        {
+            if (!first) 
+            {
+                first = prev;
+            }
+            end = root;
+        }
+    }
+    prev = root;
+    markTree(root->right, prev, first, end);
+}
+
+void recoverTree(TreeNode* root) 
+{
+    TreeNode *prev = NULL, *first = NULL, *end = NULL;
+    markTree(root, prev, first, end);
+    swap(first->val, end->val);
+    return;
+
+}
+
+
+TC: O(N)
+
+
