@@ -45,3 +45,6 @@ int numberOfBeams(vector<string>& bank)
 
 
 }
+
+
+TC : O(N)
