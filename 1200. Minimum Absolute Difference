@@ -1,0 +1,39 @@
+1200. Minimum Absolute Difference
+
+Problem Description : 
+
+Given an array of distinct integers arr, find all pairs of elements with the minimum absolute difference of any two elements.
+
+Return a list of pairs in ascending order(with respect to pairs), each pair [a, b] follows
+
+a, b are from arr
+a < b
+b - a equals to the minimum absolute difference of any two elements in arr
+
+Solution : 
+
+
+vector<vector<int>> minimumAbsDifference(vector<int>& arr) 
+{
+    vector<vector<int>> mindiffarray;
+
+    sort(arr.begin(),arr.end());
+    int min_diff = INT_MAX;
+
+    for(int i=0;i<arr.size()-1;i++)
+    {
+        min_diff = min(min_diff, abs(arr[i] - arr[i+1]));
+    }
+
+    for(int i=0;i<arr.size()-1;i++)
+    {
+        if(abs(arr[i] - arr[i+1]) == min_diff)
+            mindiffarray.push_back({arr[i], arr[i+1]});
+
+    }
+    return mindiffarray;
+
+
+}
+
+TC : O(NLOGN)
