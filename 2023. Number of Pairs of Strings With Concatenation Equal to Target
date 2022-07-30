@@ -1,0 +1,35 @@
+2023. Number of Pairs of Strings With Concatenation Equal to Target
+
+Problem Description :
+
+Given an array of digit strings nums and a digit string target, return the number of pairs of indices (i, j) (where i != j) such that the concatenation of nums[i] + nums[j] equals target.
+
+Solution :
+
+int numOfPairs(vector<string>& nums, string target) 
+{
+    unordered_map<string, int> freq;
+    for (auto num : nums) if (num.size() < target.size()) freq[num]++;
+
+    int res = 0;
+    for (auto [s, frq] : freq) 
+    {
+
+        if (target.find(s) == 0) 
+        {
+
+            if (s + s == target) 
+                res += frq*(frq-1);
+
+            else 
+                res += frq * freq[target.substr(s.size())];
+        }
+    }
+
+    return res;
+
+}
+
+TC : O(N) 
+SC : O(N) 
+N is length of vector string
