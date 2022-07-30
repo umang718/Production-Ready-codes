@@ -1,0 +1,90 @@
+2196. Create Binary Tree From Descriptions
+
+Problem Description :
+
+You are given a 2D integer array descriptions where descriptions[i] = [parenti, childi, isLefti] indicates that parenti is the parent of childi in a binary tree of unique values. Furthermore,
+
+If isLefti == 1, then childi is the left child of parenti.
+If isLefti == 0, then childi is the right child of parenti.
+Construct the binary tree described by descriptions and return its root.
+
+The test cases will be generated such that the binary tree is valid.
+
+
+Solution :
+
+TreeNode* createBinaryTree(vector<vector<int>>& descriptions) 
+{
+    set<TreeNode*>contains;
+
+    // map which contains child -> parent
+    unordered_map<TreeNode*,TreeNode*>childToParentMap;
+
+    //map which contains val->Node
+    unordered_map<int,TreeNode*>valWithNode;
+
+    for(auto &xt : descriptions)
+    {
+        int parentVal = xt[0];
+        int childVal = xt[1];
+        int isLeft = xt[2];
+
+        TreeNode* parent;
+
+        // if the parent val is already present get that particular node no need to create new 
+        if(valWithNode.find(parentVal)==valWithNode.end())
+        {
+            parent = new TreeNode(parentVal);
+            valWithNode[parentVal]=parent;
+        }
+        else
+            parent = valWithNode[parentVal];
+
+        TreeNode* child;
+
+
+        if(valWithNode.find(childVal)==valWithNode.end())
+        {
+            child = new TreeNode(childVal);
+            valWithNode[childVal]=child;
+        }
+        else
+            child = valWithNode[childVal];
+
+        contains.insert(parent);
+        contains.insert(child);
+
+
+        childToParentMap[child] = parent;
+
+        if(isLeft)
+        {
+            parent->left = child;
+        }
+        else
+        {
+            parent->right = child;
+        }
+
+    }
+
+    // interate all the nodes in contains set 
+    for(TreeNode* node : contains)
+    {
+        // if a node is not  present from child->parent map then the node is root 
+  // return it
+        if(childToParentMap.find(node)==childToParentMap.end())
+        {
+            return node;
+        }
+    }
+
+    return NULL;
+}
+
+
+TC : O(N) 
+SC : O(N) 
+N = number of nodes in tree
+
+
