@@ -1,0 +1,19 @@
+
+Function to print can sum (Repetition not allowed) 
+
+void util(int arr[], int n, vector<int> v,
+{
+	
+	if (sum == 0) 
+	{
+		res.push_back(v);
+		return;
+	}
+
+	
+	if (n == 0)
+		return;
+	util(arr, n - 1, v, sum);  //excluding the n-1th element.
+	v.push_back(arr[n - 1]);
+	util(arr, n-1, v, sum - arr[n - 1]); //including the n-ith element.
+}
