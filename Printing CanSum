@@ -50,4 +50,8 @@ Function to print can sum(repetition allowed)
         return res;
         
     }
+    
+    TC : O(l^k) 
+    l = length of array
+    k = length of longest possible combination(target/mininarray)
 
