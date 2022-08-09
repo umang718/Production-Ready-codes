@@ -17,3 +17,37 @@ void util(int arr[], int n, vector<int> v,
 	v.push_back(arr[n - 1]);
 	util(arr, n-1, v, sum - arr[n - 1]); //including the n-ith element.
 }
+
+
+
+Function to print can sum(repetition allowed)
+
+    vector<vector<int>> res;
+    
+    void util(vector<int> &v, vector<int> candidates, int target, int index)
+    {
+        int sum=accumulate(v.begin(),v.end(),0);
+        if(sum>target)
+            return;
+        if(sum==target)
+        {
+            res.push_back(v);
+            return;
+        }
+        int n=candidates.size();
+        for(int i=index;i<n;i++)
+        {
+            v.push_back(candidates[i]);
+            util(v,candidates,target,i);
+            v.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) 
+    {
+        vector<int> v;
+        int index=0;
+        util(v,candidates,target,index);
+        return res;
+        
+    }
+
